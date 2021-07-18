@@ -9,13 +9,16 @@
 /* Begin PBXBuildFile section */
 		E6D479C626A45D540061AFEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D479C526A45D540061AFEA /* AppDelegate.swift */; };
 		E6D479C826A45D540061AFEA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D479C726A45D540061AFEA /* SceneDelegate.swift */; };
-		E6D479CA26A45D540061AFEA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D479C926A45D540061AFEA /* ViewController.swift */; };
 		E6D479CD26A45D540061AFEA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6D479CB26A45D540061AFEA /* Main.storyboard */; };
 		E6D479D026A45D540061AFEA /* Reciplease.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E6D479CE26A45D540061AFEA /* Reciplease.xcdatamodeld */; };
 		E6D479D226A45D560061AFEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6D479D126A45D560061AFEA /* Assets.xcassets */; };
 		E6D479D526A45D560061AFEA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6D479D326A45D560061AFEA /* LaunchScreen.storyboard */; };
 		E6D479E026A45D560061AFEA /* RecipleaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D479DF26A45D560061AFEA /* RecipleaseTests.swift */; };
 		E6D479EB26A45D560061AFEA /* RecipleaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D479EA26A45D560061AFEA /* RecipleaseUITests.swift */; };
+		E6D479FC26A460CE0061AFEA /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D479FB26A460CE0061AFEA /* SearchViewController.swift */; };
+		E6D479FE26A460E00061AFEA /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D479FD26A460E00061AFEA /* FavoriteViewController.swift */; };
+		E6D47A0026A49C840061AFEA /* RecipesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D479FF26A49C840061AFEA /* RecipesData.swift */; };
+		E6D47A0226A49D600061AFEA /* RecipesServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D47A0126A49D600061AFEA /* RecipesServices.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +42,6 @@
 		E6D479C226A45D540061AFEA /* Reciplease.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reciplease.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6D479C526A45D540061AFEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E6D479C726A45D540061AFEA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		E6D479C926A45D540061AFEA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E6D479CC26A45D540061AFEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E6D479CF26A45D540061AFEA /* Reciplease.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Reciplease.xcdatamodel; sourceTree = "<group>"; };
 		E6D479D126A45D560061AFEA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -51,6 +53,10 @@
 		E6D479E626A45D560061AFEA /* RecipleaseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipleaseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6D479EA26A45D560061AFEA /* RecipleaseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipleaseUITests.swift; sourceTree = "<group>"; };
 		E6D479EC26A45D560061AFEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E6D479FB26A460CE0061AFEA /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		E6D479FD26A460E00061AFEA /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
+		E6D479FF26A49C840061AFEA /* RecipesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesData.swift; sourceTree = "<group>"; };
+		E6D47A0126A49D600061AFEA /* RecipesServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesServices.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +140,8 @@
 			isa = PBXGroup;
 			children = (
 				E6D479CE26A45D540061AFEA /* Reciplease.xcdatamodeld */,
+				E6D479FF26A49C840061AFEA /* RecipesData.swift */,
+				E6D47A0326A49D640061AFEA /* Services */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -150,9 +158,18 @@
 		E6D479FA26A45E710061AFEA /* Controler */ = {
 			isa = PBXGroup;
 			children = (
-				E6D479C926A45D540061AFEA /* ViewController.swift */,
+				E6D479FB26A460CE0061AFEA /* SearchViewController.swift */,
+				E6D479FD26A460E00061AFEA /* FavoriteViewController.swift */,
 			);
 			path = Controler;
+			sourceTree = "<group>";
+		};
+		E6D47A0326A49D640061AFEA /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				E6D47A0126A49D600061AFEA /* RecipesServices.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -286,9 +303,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6D479D026A45D540061AFEA /* Reciplease.xcdatamodeld in Sources */,
-				E6D479CA26A45D540061AFEA /* ViewController.swift in Sources */,
+				E6D47A0026A49C840061AFEA /* RecipesData.swift in Sources */,
 				E6D479C626A45D540061AFEA /* AppDelegate.swift in Sources */,
+				E6D479FC26A460CE0061AFEA /* SearchViewController.swift in Sources */,
 				E6D479C826A45D540061AFEA /* SceneDelegate.swift in Sources */,
+				E6D47A0226A49D600061AFEA /* RecipesServices.swift in Sources */,
+				E6D479FE26A460E00061AFEA /* FavoriteViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
