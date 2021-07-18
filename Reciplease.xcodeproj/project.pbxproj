@@ -101,14 +101,13 @@
 		E6D479C426A45D540061AFEA /* Reciplease */ = {
 			isa = PBXGroup;
 			children = (
+				E6D479F826A45E640061AFEA /* Model */,
+				E6D479F926A45E6B0061AFEA /* Vue */,
+				E6D479FA26A45E710061AFEA /* Controler */,
 				E6D479C526A45D540061AFEA /* AppDelegate.swift */,
 				E6D479C726A45D540061AFEA /* SceneDelegate.swift */,
-				E6D479C926A45D540061AFEA /* ViewController.swift */,
-				E6D479CB26A45D540061AFEA /* Main.storyboard */,
 				E6D479D126A45D560061AFEA /* Assets.xcassets */,
-				E6D479D326A45D560061AFEA /* LaunchScreen.storyboard */,
 				E6D479D626A45D560061AFEA /* Info.plist */,
-				E6D479CE26A45D540061AFEA /* Reciplease.xcdatamodeld */,
 			);
 			path = Reciplease;
 			sourceTree = "<group>";
@@ -129,6 +128,31 @@
 				E6D479EC26A45D560061AFEA /* Info.plist */,
 			);
 			path = RecipleaseUITests;
+			sourceTree = "<group>";
+		};
+		E6D479F826A45E640061AFEA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E6D479CE26A45D540061AFEA /* Reciplease.xcdatamodeld */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E6D479F926A45E6B0061AFEA /* Vue */ = {
+			isa = PBXGroup;
+			children = (
+				E6D479CB26A45D540061AFEA /* Main.storyboard */,
+				E6D479D326A45D560061AFEA /* LaunchScreen.storyboard */,
+			);
+			path = Vue;
+			sourceTree = "<group>";
+		};
+		E6D479FA26A45E710061AFEA /* Controler */ = {
+			isa = PBXGroup;
+			children = (
+				E6D479C926A45D540061AFEA /* ViewController.swift */,
+			);
+			path = Controler;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
