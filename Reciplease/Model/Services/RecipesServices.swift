@@ -6,3 +6,83 @@
 //
 
 import Foundation
+
+class RecipesServices {
+    
+    
+        var recipesData: RecipesData!
+        let baseString = "https://api.edamam.com/api/recipes/v2?type=public"
+        let appID = "&app_id=e10fb34e"
+        let appKey = "&app_key=baf5b3745dd30737d20f37b7ffda545f"
+
+        let list : [String]
+    
+    init(list: Array<String>) {
+        self.list = list
+    }
+    
+    func getURL() -> String {
+        var ingredients = ""
+        for ingredient in list {
+            ingredients += "\(ingredient) ".addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        }
+        
+        let ingredientsURL = "&q=\(ingredients)"
+        let URLString = baseString + appID + appKey + ingredientsURL
+   
+        return URLString
+    }
+    
+    private var task: URLSessionTask?
+    private var recipesSession = URLSession(configuration: .default)
+    private var imageSession = URLSession(configuration: .default)
+ 
+    func getRecipe (callback: @escaping (Bool, RecipesData?) -> Void){
+       
+        let URLString = getURL()
+     
+        if let url = URL(string: URLString) {
+            task =  recipesSession.dataTask(with: url) { (data, response, error) in
+                DispatchQueue.main.async {
+                if let data = data {
+                    do {
+                        let result = try JSONDecoder().decode(RecipesAPI.self, from: data)
+        
+                        var image : [String] = []
+                        var label: [String] = []
+                        var totalTime: [Int] = []
+                      
+
+                        for (_ ,item) in result.hits.enumerated() {
+                            image.append(item.recipe.image)
+                            label.append(item.recipe.label)
+                            totalTime.append(item.recipe.totalTime)
+                    }
+                       
+                        self.recipesData = RecipesData(image: image, label: label, totalTime: totalTime)
+
+                        callback(true, self.recipesData)
+                        
+                    } catch {
+                        print(error.localizedDescription)
+                        callback(false, nil)
+                    }
+                    if let error = error {
+                        print("Error: \(error.localizedDescription)" )
+                        callback(false, nil)
+                    }
+                }
+            }
+            }
+            task?.resume()
+        }else {
+            print("Cette url n'existe pas")
+        }
+        
+    }
+    
+
+}
+
+
+
