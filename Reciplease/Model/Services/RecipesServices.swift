@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 class RecipesServices {
     
@@ -14,6 +15,7 @@ class RecipesServices {
         let baseString = "https://api.edamam.com/api/recipes/v2?type=public"
         let appID = "&app_id=e10fb34e"
         let appKey = "&app_key=baf5b3745dd30737d20f37b7ffda545f"
+        var image : [String] = []
 
         let list : [String]
     
@@ -48,20 +50,37 @@ class RecipesServices {
                     do {
                         let result = try JSONDecoder().decode(RecipesAPI.self, from: data)
         
-                        var image : [String] = []
+                     
                         var label: [String] = []
                         var totalTime: [Int] = []
+                        var imageData : [Data] = []
+                        
                       
-
                         for (_ ,item) in result.hits.enumerated() {
-                            image.append(item.recipe.image)
+                            self.image.append(item.recipe.image)
                             label.append(item.recipe.label)
                             totalTime.append(item.recipe.totalTime)
                     }
-                       
-                        self.recipesData = RecipesData(image: image, label: label, totalTime: totalTime)
+                        
 
-                        callback(true, self.recipesData)
+                        self.getIcon { (data) in
+                            if let data = data {
+                                imageData.append(data)
+                                self.recipesData = RecipesData(image: self.image, label: label, totalTime: totalTime, imageData: imageData)
+                               
+                                callback(true, self.recipesData)
+                                
+                        }else {
+                            
+                        callback(false, nil)
+                            
+                        }
+                    }
+                      
+                          
+                        
+                        
+                        
                         
                     } catch {
                         print(error.localizedDescription)
@@ -80,9 +99,48 @@ class RecipesServices {
         }
         
     }
+     
+    var i = 0
+    
+    func getIcon(completionHandler: @escaping (Data?) -> Void){
+        while self.image.count > i {
+            if let url = URL(string: self.image[i]) {
+                task = imageSession.dataTask(with: url) { (data, response, error) in
+                    DispatchQueue.main.async {
+                        if let data = data, error == nil {
+                            do {
+                                if let response = response as? HTTPURLResponse, response.statusCode == 200 {
+                                
+                                  
+                                  
+                                        completionHandler(data)
+                               
+                                }
+                           
+                            if let error = error {
+                                print(error.localizedDescription)
+                               completionHandler(nil)
+                            }
+                            
+                        }
+                    }
+                }
+                }
+        }
+            task?.resume()
+            i += 1
+    }
+        
+}
     
 
+    
+    
 }
+    
+
+    
+    
 
 
 

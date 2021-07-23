@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class SearchViewController: UIViewController{
 
     var list = IngredientsList()
@@ -57,6 +58,7 @@ class SearchViewController: UIViewController{
     }
     
     func update(recipesData : RecipesData){
+       
         self.recipesData = recipesData
     }
 
@@ -91,11 +93,13 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource {
                      return UITableViewCell()
                 }
         let ingredient = list.names[indexPath.row]
-   
+        
+        
         cell.configure(tirets: " --- ", ingredient: "\(ingredient)")
         
         return cell
     }
     
+  
     
 }

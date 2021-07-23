@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class RecipesListViewController: UIViewController {
 
@@ -25,7 +26,7 @@ extension RecipesListViewController : UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipesData.label.count
+        return recipesData.imageData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -34,10 +35,16 @@ extension RecipesListViewController : UITableViewDataSource, UITableViewDelegate
                      return UITableViewCell()
                 }
         let recipe = recipesData.label[indexPath.row]
+        let imageData = recipesData.imageData[indexPath.row]
    
-        cell.configure(labelNameText: recipe)
+        cell.configure(labelNameText: recipe, imageData: imageData)
         
         return cell
     }
     
+ 
+   
+
+    
+ 
 }
