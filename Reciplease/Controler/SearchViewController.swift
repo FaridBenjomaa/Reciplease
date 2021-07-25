@@ -14,13 +14,13 @@ class SearchViewController: UIViewController{
     var recipesServices : RecipesServices?
     var recipesData: RecipesData!
    
-    
-    
+
     @IBAction func seachButton(_ sender: Any) {
         createList()
         performSegue(withIdentifier: "segueToGetRecipes", sender: self)
     }
     
+
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var ingdredientsToAdd: UITextField!
     
@@ -58,7 +58,6 @@ class SearchViewController: UIViewController{
     }
     
     func update(recipesData : RecipesData){
-       
         self.recipesData = recipesData
     }
 
@@ -79,6 +78,8 @@ class SearchViewController: UIViewController{
 
 
 extension SearchViewController : UITableViewDelegate, UITableViewDataSource {
+   
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -99,7 +100,18 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
+ 
+}
+
+extension SearchViewController : UITextFieldDelegate {
+
+    @IBAction func dismissKeyboard(_ sender: Any) {
+        ingdredientsToAdd.resignFirstResponder()
+    }
     
-  
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        addIngredients()
+        ingdredientsToAdd.resignFirstResponder()
+        return true
+    }
 }

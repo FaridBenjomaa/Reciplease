@@ -15,5 +15,6 @@ struct RecipesData {
     var totalTime: [Int]
 
     var imageData : [Data]
+    var ingredientsline : [[String]]
     
 }

@@ -11,14 +11,20 @@ import Alamofire
 class RecipesListViewController: UIViewController {
 
     var recipesData: RecipesData!
+    var recipeLabel : String!
+    var imageData : Data!
+    var totalTime : Int!
+    var valueToPass : String!
+   
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-     
+        
     }
-    
+
 }
+
 
 extension RecipesListViewController : UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -34,17 +40,25 @@ extension RecipesListViewController : UITableViewDataSource, UITableViewDelegate
                 PresentRecipesListTableViewCell else {
                      return UITableViewCell()
                 }
-        let recipe = recipesData.label[indexPath.row]
-        let imageData = recipesData.imageData[indexPath.row]
-   
-        cell.configure(labelNameText: recipe, imageData: imageData)
-        
+     
+        recipeLabel = recipesData.label[indexPath.row]
+        imageData = recipesData.imageData[indexPath.row]
+        totalTime = recipesData.totalTime[indexPath.row]
+
+        cell.configure(labelNameText: recipeLabel, imageData: imageData, totalTime: totalTime)
+    
         return cell
     }
     
- 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "ShowRecipesViewController") as? ShowRecipesViewController
+        vc!.recipeLabel = recipesData.label[indexPath.row]
+        vc!.imageData = recipesData.imageData[indexPath.row]
+        vc!.ingredientsline = recipesData.ingredientsline[indexPath.row]
+        self.navigationController?.pushViewController(vc!, animated: true)
+    }
    
-
+     
     
  
 }
