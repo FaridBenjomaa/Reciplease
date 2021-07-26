@@ -9,9 +9,13 @@ import UIKit
 
 class IngredientsLineTableViewCell: UITableViewCell {
 
+    var presentRecipes = PresentRecipesListTableViewCell()
     
     @IBOutlet weak var tirets: UILabel!
     @IBOutlet weak var ingredients: UILabel!
+    
+
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -22,5 +26,6 @@ class IngredientsLineTableViewCell: UITableViewCell {
         ingredients.text = ingredient
     }
 
+ 
 
 }

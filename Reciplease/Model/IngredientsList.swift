@@ -9,4 +9,9 @@ import Foundation
 
 struct IngredientsList{
     var names : [String] = []
+    
+    mutating func removeElement(at index: Int){
+        names.remove(at: index)
+    }
+   
 }

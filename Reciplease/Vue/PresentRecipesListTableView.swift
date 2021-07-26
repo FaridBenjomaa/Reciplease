@@ -23,25 +23,25 @@ class PresentRecipesListTableViewCell: UITableViewCell {
         // Initialization code
     }
     
-    fileprivate func convertionTime(_ totalTime: Int) {
+    public func convertionTime(_ totalTime: Int, _ timerlabel : UILabel) {
         if totalTime > 60 {
             let totalHour = totalTime / 60
             let totalMinutes = totalTime - (totalHour * 60)
-            timerLabel.text = "\(totalHour) h \(totalMinutes) m"
+            timerlabel.text = "\(totalHour) h \(totalMinutes) m"
         }else if totalTime == 0 {
-            timerLabel.text = " NA "
+            timerlabel.text = " NA "
         }else{
-            timerLabel.text = "\(totalTime) m"
+            timerlabel.text = "\(totalTime) m"
         }
     }
     
-    func configure(labelNameText : String, imageData: Data, totalTime : Int){
+    func configure(labelNameText : String, imageData: Data, totalTime : Int, dishType: [String], timerlabel: UILabel){
         
         labelName.text = " \(labelNameText)"
-        convertionTime(totalTime)
+        convertionTime(totalTime, timerlabel)
         backgroundImage.contentMode = .scaleAspectFill
         backgroundImage.image = UIImage(data: imageData)
-        
+        ingredients.text = "\(dishType)"
     }
     
  

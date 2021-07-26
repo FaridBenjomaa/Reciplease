@@ -13,8 +13,8 @@ struct RecipesData {
     var image : [String]
     var label: [String]
     var totalTime: [Int]
-
+    var dishType : [[String]]
+    
     var imageData : [Data]
     var ingredientsline : [[String]]
-    
 }

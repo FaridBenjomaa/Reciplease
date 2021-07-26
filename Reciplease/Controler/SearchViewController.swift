@@ -16,7 +16,8 @@ class SearchViewController: UIViewController{
    
 
     @IBAction func seachButton(_ sender: Any) {
-        createList()
+        
+        createList(listing: list.names)
         performSegue(withIdentifier: "segueToGetRecipes", sender: self)
     }
     
@@ -24,22 +25,27 @@ class SearchViewController: UIViewController{
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var ingdredientsToAdd: UITextField!
     
-    fileprivate func createList() {
+    fileprivate func createList(listing : [String]) {
         tableView.reloadData()
-        
-        recipesServices = RecipesServices(list: list.names)
-        
+        recipesServices = RecipesServices(list: listing)
         getRecipes(recipesServices: recipesServices!)
+     
     }
     
     fileprivate func addIngredients() {
         let newIngredient = ingdredientsToAdd.text
         list.names.append(newIngredient!)
-        createList()
+        createList(listing : list.names)
     }
     
     @IBAction func add(_ sender: Any) {
         addIngredients()
+       
+    }
+    
+    @IBAction func clearButton(_ sender: Any) {
+        list.names.removeAll()
+        createList(listing: list.names)
     }
     
     override func viewDidLoad() {
@@ -50,7 +56,6 @@ class SearchViewController: UIViewController{
         recipesServices.getRecipe { (success, recipesData) in
             if success, let recipesData = recipesData {
                 self.update(recipesData: recipesData)
-               
             }else {
                 self.presentAlert()
             }
@@ -77,7 +82,7 @@ class SearchViewController: UIViewController{
 }
 
 
-extension SearchViewController : UITableViewDelegate, UITableViewDataSource {
+extension SearchViewController : UITableViewDataSource {
    
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -101,6 +106,18 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource {
         return cell
     }
  
+}
+
+extension SearchViewController : UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            list.removeElement(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .left)
+            createList(listing: list.names)
+        }
+    }
+    
 }
 
 extension SearchViewController : UITextFieldDelegate {

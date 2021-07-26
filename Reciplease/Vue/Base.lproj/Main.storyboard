@@ -230,6 +230,9 @@
                                         <state key="normal" title="Clear">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="clearButton:" destination="yLJ-hD-g1T" eventType="touchUpInside" id="m9d-gM-E7r"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -455,6 +458,7 @@
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hand.thumbsup.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="rWg-Lh-JFn">
                                                 <rect key="frame" x="58" y="-0.5" width="47" height="50"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </imageView>
                                         </subviews>
                                         <viewLayoutGuide key="safeArea" id="UfM-uz-2en"/>
@@ -469,6 +473,7 @@
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer" catalog="system" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q3K-J5-fql">
                                                 <rect key="frame" x="62" y="1" width="43" height="49"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <rect key="contentStretch" x="0.0" y="0.0" width="0.90000000000000002" height="1"/>
                                             </imageView>
                                         </subviews>
@@ -598,7 +603,9 @@
                         <barButtonItem key="rightBarButtonItem" image="star" catalog="system" style="plain" id="Hhx-h3-k0s"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="likeLabel" destination="LTN-ZD-iRZ" id="jdK-dw-kpq"/>
                         <outlet property="recipesImage" destination="wwE-MH-FvO" id="UD8-7b-Ack"/>
+                        <outlet property="timerLabel" destination="Rgg-kb-051" id="Uv6-eS-hCR"/>
                         <outlet property="titleRecipes" destination="I6c-L0-ANy" id="AY5-kP-wE2"/>
                     </connections>
                 </viewController>

@@ -16,15 +16,12 @@ class RecipesListViewController: UIViewController {
     var totalTime : Int!
     var valueToPass : String!
    
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
 
 }
-
 
 extension RecipesListViewController : UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -44,8 +41,9 @@ extension RecipesListViewController : UITableViewDataSource, UITableViewDelegate
         recipeLabel = recipesData.label[indexPath.row]
         imageData = recipesData.imageData[indexPath.row]
         totalTime = recipesData.totalTime[indexPath.row]
+        let dishType = recipesData.dishType[indexPath.row] 
 
-        cell.configure(labelNameText: recipeLabel, imageData: imageData, totalTime: totalTime)
+        cell.configure(labelNameText: recipeLabel, imageData: imageData, totalTime: totalTime, dishType: dishType, timerlabel: cell.timerLabel)
     
         return cell
     }
@@ -55,10 +53,8 @@ extension RecipesListViewController : UITableViewDataSource, UITableViewDelegate
         vc!.recipeLabel = recipesData.label[indexPath.row]
         vc!.imageData = recipesData.imageData[indexPath.row]
         vc!.ingredientsline = recipesData.ingredientsline[indexPath.row]
+        vc!.totalTime = recipesData.totalTime[indexPath.row]
         self.navigationController?.pushViewController(vc!, animated: true)
     }
    
-     
-    
- 
 }
