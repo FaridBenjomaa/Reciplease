@@ -9,7 +9,6 @@ import Foundation
 
 struct RecipesData {
     
-    
     var image : [String]
     var label: [String]
     var totalTime: [Int]
