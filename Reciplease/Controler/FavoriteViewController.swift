@@ -10,47 +10,32 @@ import CoreData
 
 class FavoriteViewController: UIViewController, NSFetchedResultsControllerDelegate{
     
-    var result : NSFetchedResultsController<Recipes>!
+    var recipes = Recipes.all
+    var recipe : Recipes!
     
-    var recipesList : [Recipes] = []
     
- 
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(recipesList)
-        
-        let request: NSFetchRequest<Recipes>! = Recipes.fetchRequest()
-        let sortDescriptor = NSSortDescriptor(key: "label", ascending: true)
-        request.sortDescriptors = [sortDescriptor]
-        
-        let context = AppDelegate.persistantContainer.viewContext
-        result = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-        result.delegate = self
-        
-        do {
-            try result.performFetch()
-            if let fetchObject = result.fetchedObjects {
-                recipesList = fetchObject
-            }
-        }catch{
-            print(error)
-        }
-        
     }
     
-  
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        recipes = Recipes.all
+        tableView.reloadData()
+    }
+    
 }
 
-extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
+extension FavoriteViewController: UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipesList.count
+        return recipes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -59,46 +44,40 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
         
-        let recipeLabel = recipesList[indexPath.row].label
-        let imageData = recipesList[indexPath.row].imageData
-        let totalTime = recipesList[indexPath.row].totalTime
+        let recipe = recipes[indexPath.row]
+        let recipeLabel = recipe.label
+        let imageData = recipe.imageData
+        let totalTime = recipe.totalTime
         
-        cell.configure(labelNameText: recipeLabel!, imageDatas: imageData!, totalTime: Int(totalTime), timerlabel: cell.timerlabel)
-        
+        cell.configure(labelNameText: recipeLabel!, imageDatas: imageData!, totalTime: Int(totalTime), timerlabel: cell.labelTime)
         
         return cell
     }
     
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.beginUpdates()
-    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        switch type {
-        case .insert:
-            if let newIndexPath = newIndexPath{
-                tableView.insertRows(at: [newIndexPath], with: .fade)
-            }
-        case .delete :
-            if let indexPath = indexPath{
-                tableView.deleteRows(at: [indexPath], with: .fade)
-            }
-        case .update:
-            if let indexPath = indexPath{
-                tableView.reloadRows(at: [indexPath], with: .fade)
-            }
-        default:
-            tableView.reloadData()
-        }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "ShowFavoriteRecipesViewController") as? ShowFavoriteRecipesViewController
         
-        if let fetchedObjects = controller.fetchedObjects {
-            recipesList = fetchedObjects as! [Recipes]
-        }
+        vc!.indexRow = indexPath.row
+        self.navigationController?.pushViewController(vc!, animated: true)
     }
     
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.endUpdates()
+}
+
+extension FavoriteViewController : UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+            let recipe = recipes[indexPath.row]
+            AppDelegate.persistantContainer.viewContext.delete(recipe)
+            recipes.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            try? AppDelegate.persistantContainer.viewContext.save()
+            
+        }
     }
 }
+
 
 

@@ -12,9 +12,7 @@ class PresentRecipesListTableViewCell: UITableViewCell {
     
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var ingredients: UILabel!
-    
     @IBOutlet weak var backgroundImage: UIImageView!
- 
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var likeLabel: UILabel!
     

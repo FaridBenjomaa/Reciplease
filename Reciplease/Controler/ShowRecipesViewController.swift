@@ -48,7 +48,9 @@ class ShowRecipesViewController: UIViewController {
  
     func saveRecipes(image: Data, label: String, time: Int, ingredients : [String]) {
         recipe = Recipes(context: AppDelegate.viewContex)
-        recipe.imageData = image
+        if let image = recipesImage.image {
+            recipe.imageData = image.pngData()
+        }
         recipe.label =  label
         recipe.totalTime = Int16(time)
         recipe.ingredientsLine = ingredients

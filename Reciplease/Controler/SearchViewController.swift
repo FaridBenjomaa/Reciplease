@@ -13,18 +13,16 @@ class SearchViewController: UIViewController{
     var list = IngredientsList()
     var recipesServices : RecipesServices?
     var recipesData: RecipesData!
-   
 
+    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var ingdredientsToAdd: UITextField!
     @IBAction func seachButton(_ sender: Any) {
         
         createList(listing: list.names)
         performSegue(withIdentifier: "segueToGetRecipes", sender: self)
     }
-    
 
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var ingdredientsToAdd: UITextField!
-    
     fileprivate func createList(listing : [String]) {
         tableView.reloadData()
         recipesServices = RecipesServices(list: listing)
@@ -40,7 +38,6 @@ class SearchViewController: UIViewController{
     
     @IBAction func add(_ sender: Any) {
         addIngredients()
-       
     }
     
     @IBAction func clearButton(_ sender: Any) {
@@ -81,10 +78,8 @@ class SearchViewController: UIViewController{
 
 }
 
-
 extension SearchViewController : UITableViewDataSource {
    
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }

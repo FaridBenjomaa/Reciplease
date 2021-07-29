@@ -10,13 +10,14 @@ import Alamofire
 
 class RecipesServices {
     
+
+    
     
     var recipesData: RecipesData!
     let baseString = "https://api.edamam.com/api/recipes/v2?type=public"
     let appID = "&app_id=e10fb34e"
     let appKey = "&app_key=baf5b3745dd30737d20f37b7ffda545f"
     var image : [String] = []
-    
     let list : [String]
     
     init(list: Array<String>) {
@@ -36,6 +37,12 @@ class RecipesServices {
     private var task: URLSessionTask?
     private var recipesSession = URLSession(configuration: .default)
     private var imageSession = URLSession(configuration: .default)
+    
+    init(recipesSession: URLSession, imageSession:URLSession, list: Array<String>){
+        self.recipesSession = recipesSession
+        self.imageSession = imageSession
+        self.list = list
+    }
     
     func getRecipe (callback: @escaping (Bool, RecipesData?) -> Void){
         

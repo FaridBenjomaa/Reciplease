@@ -9,6 +9,16 @@ import Foundation
 import CoreData
 
 class Recipes : NSManagedObject {
-    
+    static var all: [Recipes] {
+        let request: NSFetchRequest<Recipes> = Recipes.fetchRequest()
+        request.sortDescriptors = [
+            NSSortDescriptor(key: "label", ascending: true)
+        ]
+        guard let recipes = try? AppDelegate.viewContex.fetch(request) else {
+            return []
+        }
+        return recipes 
+    }
 
+    
 }

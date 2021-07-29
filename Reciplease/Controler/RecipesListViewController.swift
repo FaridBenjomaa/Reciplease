@@ -18,9 +18,8 @@ class RecipesListViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
     }
-
 }
 
 extension RecipesListViewController : UITableViewDataSource, UITableViewDelegate {
@@ -44,7 +43,7 @@ extension RecipesListViewController : UITableViewDataSource, UITableViewDelegate
         let dishType = recipesData.dishType[indexPath.row] 
 
         cell.configure(labelNameText: recipeLabel, imageData: imageData, totalTime: totalTime, dishType: dishType, timerlabel: cell.timerLabel)
-    
+        
         return cell
     }
     
@@ -56,5 +55,4 @@ extension RecipesListViewController : UITableViewDataSource, UITableViewDelegate
         vc!.totalTime = recipesData.totalTime[indexPath.row]
         self.navigationController?.pushViewController(vc!, animated: true)
     }
-   
 }
