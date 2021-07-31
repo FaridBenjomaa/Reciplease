@@ -16,4 +16,6 @@ struct RecipesData {
     
     var imageData : [Data]
     var ingredientsline : [[String]]
+    
+    var url : [String]
 }

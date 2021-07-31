@@ -8,20 +8,32 @@
 import UIKit
 
 class ShowFavoriteRecipesViewController: UIViewController {
-
+    
     var recipes = Recipes.all
     var indexRow : Int!
-    
+    var urlWebPage : String!
     
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var label: UILabel!
+    
+    @IBAction func showWebPage(_ sender: Any) {
+        urlWebPage = recipes[indexRow].url
+        performSegue(withIdentifier: "FavoriteToWebPage", sender: self)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         image.image = UIImage(data: recipes[indexRow].imageData!)
         label.text = recipes[indexRow].label
         timerLabel.text = String(recipes[indexRow].totalTime)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "FavoriteToWebPage" {
+            let vc = segue.destination as! WebViewController
+            vc.urlWebPage = urlWebPage
+        }
     }
     
 }
@@ -51,7 +63,7 @@ extension ShowFavoriteRecipesViewController: UITableViewDataSource {
         return cell
     }
     
-
+    
     
     
 }

@@ -10,6 +10,7 @@ import CoreData
 
 class ShowRecipesViewController: UIViewController {
 
+    
     var recipesData: RecipesData!
     var presentRecipes = PresentRecipesListTableViewCell()
     var recipeLabel : String!
@@ -18,6 +19,9 @@ class ShowRecipesViewController: UIViewController {
     var valueToPass : String!
     var ingredientsline : [String]!
     var ingredient : String!
+    var url : String!
+    var urlWebPage: String!
+    
  
     
     var recipe = Recipes()
@@ -28,6 +32,12 @@ class ShowRecipesViewController: UIViewController {
     @IBOutlet weak var recipesImage: UIImageView!
     @IBOutlet weak var titleRecipes: UILabel!
     
+
+    @IBAction func showWebPage(_ sender: Any) {
+       urlWebPage = url
+        performSegue(withIdentifier: "APIToWebPage", sender: self)
+    }
+
     @IBAction func addFavorite(_ sender: Any) {
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -40,13 +50,14 @@ class ShowRecipesViewController: UIViewController {
         let label = recipeLabel
         let time = totalTime
         let ingredients = ingredientsline
+        let url = url
 
-        saveRecipes(image: image!, label: label!, time: time!, ingredients: ingredients!)
+        saveRecipes(image: image!, label: label!, time: time!, ingredients: ingredients!, url: url!)
  
     }
     //TODO modifier l'action du bouton si il est plein
  
-    func saveRecipes(image: Data, label: String, time: Int, ingredients : [String]) {
+    func saveRecipes(image: Data, label: String, time: Int, ingredients : [String], url: String) {
         recipe = Recipes(context: AppDelegate.viewContex)
         if let image = recipesImage.image {
             recipe.imageData = image.pngData()
@@ -54,6 +65,7 @@ class ShowRecipesViewController: UIViewController {
         recipe.label =  label
         recipe.totalTime = Int16(time)
         recipe.ingredientsLine = ingredients
+        recipe.url = url
         try? AppDelegate.viewContex.save()
     }
     
@@ -64,6 +76,13 @@ class ShowRecipesViewController: UIViewController {
         presentRecipes.convertionTime(totalTime, timerLabel)
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "APIToWebPage" {
+            let vc = segue.destination as! WebViewController
+            vc.urlWebPage = urlWebPage
+            
+    }
+    }
 }
 
 

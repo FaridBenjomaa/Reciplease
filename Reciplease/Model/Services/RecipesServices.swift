@@ -60,6 +60,7 @@ class RecipesServices {
                             var imageData : [Data] = []
                             var ingredientLines : [[String]] = [[]]
                             var dishType : [[String]] = [[]]
+                            var url : [String] = []
                             
                             for (_ ,item) in result.hits.enumerated() {
                                 self.image.append(item.recipe.image)
@@ -67,13 +68,14 @@ class RecipesServices {
                                 totalTime.append(item.recipe.totalTime)
                                 ingredientLines.append(item.recipe.ingredientLines)
                                 dishType.append(item.recipe.dishType ?? [])
+                                url.append(item.recipe.url)
                             }
                             
                             
                             self.getIcon { (data) in
                                 if let data = data {
                                     imageData.append(data)
-                                    self.recipesData = RecipesData(image: self.image, label: label, totalTime: totalTime, dishType : dishType, imageData: imageData, ingredientsline: ingredientLines)
+                                    self.recipesData = RecipesData(image: self.image, label: label, totalTime: totalTime, dishType : dishType, imageData: imageData, ingredientsline: ingredientLines, url: url)
                                  
                                     callback(true, self.recipesData)
                                 }else {

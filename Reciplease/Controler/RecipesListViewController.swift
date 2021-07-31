@@ -14,6 +14,7 @@ class RecipesListViewController: UIViewController {
     var recipeLabel : String!
     var imageData : Data!
     var totalTime : Int!
+    var url : String!
     var valueToPass : String!
    
     override func viewDidLoad() {
@@ -49,6 +50,7 @@ extension RecipesListViewController : UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "ShowRecipesViewController") as? ShowRecipesViewController
+        vc!.url = recipesData.url[indexPath.row]
         vc!.recipeLabel = recipesData.label[indexPath.row]
         vc!.imageData = recipesData.imageData[indexPath.row]
         vc!.ingredientsline = recipesData.ingredientsline[indexPath.row]
