@@ -19,6 +19,13 @@ class Recipes : NSManagedObject {
         }
         return recipes 
     }
-
+    
+    var ingredientsList : [String] = [ ]
     
 }
+
+
+
+   
+
+

@@ -18,9 +18,19 @@ class SearchViewController: UIViewController{
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var ingdredientsToAdd: UITextField!
     @IBAction func seachButton(_ sender: Any) {
+        if list.names.count > 0 {
+            createList(listing: list.names)
+            performSegue(withIdentifier: "segueToGetRecipes", sender: self)
+        }else {
+            presentAlertEmptyList()
+        }
         
-        createList(listing: list.names)
-        performSegue(withIdentifier: "segueToGetRecipes", sender: self)
+    }
+    
+    func presentAlertEmptyList(){
+        let alertVC = UIAlertController(title: "Error", message: "Merci d'ajouter un ingredient a la liste" , preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        present(alertVC, animated: true, completion: nil)
     }
 
     fileprivate func createList(listing : [String]) {

@@ -12,8 +12,12 @@ class FavoriteViewController: UIViewController, NSFetchedResultsControllerDelega
     
     var recipes = Recipes.all
     var recipe : Recipes!
-    
-    
+    var recipeLabel : String!
+    var imageData : Data!
+    var totalTime : Int!
+    var url : String!
+    var valueToPass : String!
+
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -55,13 +59,22 @@ extension FavoriteViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: "ShowFavoriteRecipesViewController") as? ShowFavoriteRecipesViewController
+        let vc = storyboard?.instantiateViewController(withIdentifier: "ShowRecipesViewController") as? ShowRecipesViewController
         
-        vc!.indexRow = indexPath.row
+        let recipe = recipes[indexPath.row]
+        vc!.url = recipe.url
+        vc!.recipeLabel = recipe.label
+        vc!.imageData = recipe.imageData
+        vc!.ingredientsline = recipe.ingredientsList
+        vc!.totalTime = Int(recipe.totalTime) 
+ 
+        
         self.navigationController?.pushViewController(vc!, animated: true)
     }
     
 }
+
+
 
 extension FavoriteViewController : UITableViewDelegate {
     

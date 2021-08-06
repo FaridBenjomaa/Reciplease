@@ -53,7 +53,7 @@ extension RecipesListViewController : UITableViewDataSource, UITableViewDelegate
         vc!.url = recipesData.url[indexPath.row]
         vc!.recipeLabel = recipesData.label[indexPath.row]
         vc!.imageData = recipesData.imageData[indexPath.row]
-        vc!.ingredientsline = recipesData.ingredientsline[indexPath.row]
+        vc!.ingredients = recipesData.ingredientsline[indexPath.row]
         vc!.totalTime = recipesData.totalTime[indexPath.row]
         self.navigationController?.pushViewController(vc!, animated: true)
     }
