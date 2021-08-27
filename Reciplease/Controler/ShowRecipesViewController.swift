@@ -10,7 +10,7 @@ import CoreData
 
 class ShowRecipesViewController: UIViewController {
 
-    
+    //MARK: Properties
     var recipesData: RecipesData!
     var presentRecipes = PresentRecipesListTableViewCell()
     var recipeLabel : String!
@@ -22,11 +22,12 @@ class ShowRecipesViewController: UIViewController {
     var ingredient : String!
     var url : String!
     var urlWebPage: String!
-
     var recipe = Recipes()
     var recipes = Recipes.all
+    var ingredientName = IngredientListName.all
     var recipesList : [Recipes] = []
 
+    
     //MARK: Outlets 
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var likeLabel: UILabel!
@@ -34,7 +35,6 @@ class ShowRecipesViewController: UIViewController {
     @IBOutlet weak var titleRecipes: UILabel!
     @IBOutlet weak var tableView: UITableView!
 
-    
     
     @IBAction func showWebPage(_ sender: Any) {
        urlWebPage = url
@@ -48,10 +48,11 @@ class ShowRecipesViewController: UIViewController {
             target: self,
             action: nil)
         
-        saveRecipes(image: image!, label: label!, time: time!, url: url!)
+        recipe.saveRecipes(image: image!, label: label!, time: time!, url: url!, ingredients: ingredients, recipesImage: recipesImage)
+     
     }
     
-  
+
     
     @IBAction func addFavorite(_ sender: Any) {
 
@@ -63,31 +64,18 @@ class ShowRecipesViewController: UIViewController {
         addToFavorite (image, label, time, url)
     }
 
-
-    func saveRecipes(image: Data, label: String, time: Int, url: String) {
-        recipe = Recipes(context: AppDelegate.viewContex)
-        if let image = recipesImage.image {
-            recipe.imageData = image.pngData()
-        }
-        recipe.label =  label
-        recipe.totalTime = Int16(time)
-        recipe.url = url
-    
-        for item in ingredients {
-            recipe.ingredientLine = item
-            recipe.ingredientsList.append(recipe.ingredientLine!)
-        }
-
-        try? AppDelegate.viewContex.save()
-    }
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         titleRecipes.text = recipeLabel
         recipesImage.image = UIImage(data: imageData)
         presentRecipes.convertionTime(totalTime, timerLabel)
-
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        ingredientName = IngredientListName.all
+        tableView.reloadData()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -97,8 +85,6 @@ class ShowRecipesViewController: UIViewController {
         }
     }
 }
-
-
 
 extension ShowRecipesViewController : UITableViewDataSource, UITableViewDelegate{
     
@@ -110,8 +96,8 @@ extension ShowRecipesViewController : UITableViewDataSource, UITableViewDelegate
        var ingredientIndex = 0
         if ingredients.count > 0 {
             ingredientIndex = ingredients.count
-        }else if ingredientsline.count > 0{
-            ingredientIndex = ingredientsline.count
+        }else if ingredientName.count > 0{
+            ingredientIndex = ingredientName.count
         }
         return ingredientIndex
     }
@@ -124,11 +110,12 @@ extension ShowRecipesViewController : UITableViewDataSource, UITableViewDelegate
         
         if ingredients.count > 0 {
             ingredient = ingredients[indexPath.row]
-        }else if ingredientsline.count > 0{
-            ingredient =  ingredientsline[indexPath.row]
+        }else if ingredientName.count > 0{
+            
+            let ingredientName =  ingredientName[indexPath.row]
+            ingredient = ingredientName.name
         }
-      
-        
+
         cell.configure(tiret: " - ", ingredient: ingredient!)
         
         return cell

@@ -12,6 +12,7 @@ class FavoriteViewController: UIViewController, NSFetchedResultsControllerDelega
     
     var recipes = Recipes.all
     var recipe : Recipes!
+
     var recipeLabel : String!
     var imageData : Data!
     var totalTime : Int!
@@ -31,6 +32,9 @@ class FavoriteViewController: UIViewController, NSFetchedResultsControllerDelega
     }
     
 }
+
+
+
 
 extension FavoriteViewController: UITableViewDataSource{
     
@@ -65,16 +69,14 @@ extension FavoriteViewController: UITableViewDataSource{
         vc!.url = recipe.url
         vc!.recipeLabel = recipe.label
         vc!.imageData = recipe.imageData
-        vc!.ingredientsline = recipe.ingredientsList
-        vc!.totalTime = Int(recipe.totalTime) 
- 
         
+        vc!.totalTime = Int(recipe.totalTime)
+
+
         self.navigationController?.pushViewController(vc!, animated: true)
     }
     
 }
-
-
 
 extension FavoriteViewController : UITableViewDelegate {
     
